@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jzl.dao.StudentDao">
+
+    <select id="getById" resultType="com.jzl.entity.Student">
+        select * from student where id=#{id}
+    </select>
+
+    <select id="getAll" resultType="com.jzl.entity.Student">
+        select * from student
+    </select>
+
+    <!--这里一定要给别名，要和VO实体类里面的属性一致，否则会不能赋值-->
+    <select id="stuAndclass" resultType="com.jzl.vo.StudentAndClassroomVO">
+        select s.id sid,s.name sname,s.email semail,s.age sage,c.id cid,c.name cname
+        from student s,classroom c
+        where s.classroomid=c.id
+          and s.name like #{name} '%'
+    </select>
+</mapper>
